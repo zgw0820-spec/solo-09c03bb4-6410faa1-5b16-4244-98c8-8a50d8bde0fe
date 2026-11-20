@@ -1,0 +1,39 @@
+name: offline-importer
+
+services:
+  importer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: offline-importer:1.0.0
+    container_name: offline-importer
+    # Single instance: run exactly one container.  The app additionally takes a
+    # flock on /data/lock and refuses to start a second process on the same volume.
+    ports:
+      - "8080:8080"
+    environment:
+      DATA_DIR: /data
+      SEED_INITIAL_IMAGE: /seed/image-v1.tar
+      SEED_REQUIRED: "true"
+      DEMO_DIR: /demo
+      ENABLE_DEMO: "true"
+      MAX_IMPORT_BYTES: "4294967296"
+    volumes:
+      # The only writable volume.  Blobs and versions are content-addressed and
+      # never rewritten in place, so an interrupted import cannot corrupt the
+      # active version.
+      - importer-data:/data
+      # Read-only inputs: initial image write-up and the update / broken packages.
+      - ./samples:/seed:ro
+      - ./samples:/demo:ro
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    restart: unless-stopped
+
+volumes:
+  importer-data:

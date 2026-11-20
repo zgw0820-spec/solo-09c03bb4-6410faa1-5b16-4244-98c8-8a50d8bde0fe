@@ -1,0 +1,49 @@
+{
+  "broken": {
+    "badDigest": {
+      "corruptedDigest": "sha256:bf0e0a23d0dfd4fa05a8c5a954fed6f5ddbfeacf00c71d0e1b603e030694a0eb",
+      "expect": "blob_mismatch",
+      "file": "broken-bad-digest.tar",
+      "platform": "linux/arm64"
+    },
+    "mismatchSize": {
+      "actualSize": 180,
+      "descriptorSize": 4276,
+      "expect": "blob_mismatch",
+      "file": "broken-mismatch-size.tar",
+      "indexDigest": "sha256:ad7324aad0759a850efcc692bc02251828bf08483804833ac8ec1ead3f66b4d4",
+      "layerDigest": "sha256:b7ff44f0f1db79f13a15b7f16577f00216e53bc549b4cef280583cd5b1b80baa",
+      "platform": "linux/amd64"
+    },
+    "missingLayer": {
+      "expect": "blob_missing",
+      "file": "broken-missing-layer.tar",
+      "missingDigest": "sha256:bf0e0a23d0dfd4fa05a8c5a954fed6f5ddbfeacf00c71d0e1b603e030694a0eb",
+      "platform": "linux/arm64"
+    }
+  },
+  "ref": "offline/image",
+  "v1": {
+    "file": "image-v1.tar",
+    "indexDigest": "sha256:7db237984c5ae40d72f815101dd42ed20e2ffecefa41be229fee5b82da295f68",
+    "platforms": [
+      "linux/amd64",
+      "linux/arm64"
+    ]
+  },
+  "v2": {
+    "file": "image-v2.tar",
+    "fullSize": 2099200,
+    "indexDigest": "sha256:aced39f83dd48ac1298ccfe0fc3d29647313b5e4ea588ae5e306172becc9526c",
+    "newBlobs": [
+      "sha256:566d29d5842ea1be532c8b8c28448443ba6691778e4b6dccd51c828f66d0a1a8",
+      "sha256:7bd6addb50690a567ce7c4afedea82dcf903412ff9167dbc1c1ebf9dc4f87393"
+    ],
+    "reusedBlobs": [
+      "sha256:5b5f40b3262aff0d0b609c569ec10c76917f87bf21fd67e3a9cc2c1fed85b246",
+      "sha256:ba6775361dfd1b0746ecc965adb83616fbe1f54d8026e195adfff61081715549"
+    ],
+    "updateFile": "update-v2.tar",
+    "updateSize": 20480
+  }
+}
